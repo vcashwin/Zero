@@ -15,7 +15,7 @@ import {
   writingStyleMatrix,
 } from './db/schema';
 import { env, WorkerEntrypoint, DurableObject, RpcTarget } from 'cloudflare:workers';
-import { getZeroAgent, getZeroDB, verifyToken } from './lib/server-utils';
+import { getZeroDB, verifyToken } from './lib/server-utils';
 import { MainWorkflow, ThreadWorkflow, ZeroWorkflow } from './pipelines';
 import { oAuthDiscoveryMetadata } from 'better-auth/plugins';
 import { EProviders, type ISubscribeBatch } from './types';
@@ -24,7 +24,6 @@ import { contextStorage } from 'hono/context-storage';
 import { defaultUserSettings } from './lib/schemas';
 import { createLocalJWKSet, jwtVerify } from 'jose';
 import { routePartykitRequest } from 'partyserver';
-import { withMcpAuth } from 'better-auth/plugins';
 import { enableBrainFunction } from './lib/brain';
 import { trpcServer } from '@hono/trpc-server';
 import { agentsMiddleware } from 'hono-agents';

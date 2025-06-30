@@ -2,7 +2,6 @@ import { createRateLimiterMiddleware, privateProcedure, publicProcedure, router 
 import { defaultUserSettings, userSettingsSchema, type UserSettings } from '../../lib/schemas';
 import { getZeroDB } from '../../lib/server-utils';
 import { Ratelimit } from '@upstash/ratelimit';
-import { env } from 'cloudflare:workers';
 
 export const settingsRouter = router({
   get: publicProcedure

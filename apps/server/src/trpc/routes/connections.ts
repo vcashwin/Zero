@@ -1,10 +1,7 @@
 import { createRateLimiterMiddleware, privateProcedure, publicProcedure, router } from '../trpc';
 import { getActiveConnection, getZeroDB } from '../../lib/server-utils';
-import { connection, user as user_ } from '../../db/schema';
 import { Ratelimit } from '@upstash/ratelimit';
-import { env } from 'cloudflare:workers';
 import { TRPCError } from '@trpc/server';
-import { and, eq } from 'drizzle-orm';
 import { z } from 'zod';
 
 export const connectionsRouter = router({

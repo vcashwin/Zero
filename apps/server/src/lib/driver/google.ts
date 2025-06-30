@@ -8,7 +8,7 @@ import {
   sanitizeContext,
   StandardizedError,
 } from './utils';
-import type { IOutgoingMessage, Label, ParsedMessage, DeleteAllSpamResponse } from '../../types';
+import type { IOutgoingMessage, Label, ParsedMessage } from '../../types';
 import { mapGoogleLabelColor, mapToGoogleLabelColor } from './google-label-color-map';
 import { parseAddressList, parseFrom, wasSentWithTLS } from '../email-utils';
 import { sanitizeTipTapHtml } from '../sanitize-tip-tap-html';
@@ -234,7 +234,7 @@ export class GoogleMailManager implements MailManager {
         return {
           threads: threads
             .filter((thread) => typeof thread.id === 'string')
-            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+             
             .map((thread) => ({
               id: thread.id!,
               historyId: thread.historyId ?? null,
@@ -303,7 +303,7 @@ export class GoogleMailManager implements MailManager {
                 )?.value;
                 if (contentId && part.body?.attachmentId) {
                   try {
-                    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                     
                     const imageData = await this.getAttachment(message.id!, part.body.attachmentId);
                     if (imageData) {
                       const cleanContentId = contentId.replace(/[<>]/g, '');
@@ -949,7 +949,7 @@ export class GoogleMailManager implements MailManager {
     cc,
     bcc,
     fromEmail,
-    isForward = false,
+    isForward: _isForward = false,
     originalMessage = null,
   }: IOutgoingMessage) {
     const msg = createMimeMessage();

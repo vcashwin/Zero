@@ -1,10 +1,10 @@
 import {
-  connection,
-  user as _user,
-  account,
-  userSettings,
-  session,
-  userHotkeys,
+  // connection,
+  // user as _user,
+  // account,
+  // userSettings,
+  // session,
+  // userHotkeys,
 } from '../db/schema';
 import { createAuthMiddleware, phoneNumber, jwt, bearer, mcp } from 'better-auth/plugins';
 import { type Account, betterAuth, type BetterAuthOptions } from 'better-auth';
@@ -12,17 +12,17 @@ import { getBrowserTimezone, isValidTimezone } from './timezones';
 import { drizzleAdapter } from 'better-auth/adapters/drizzle';
 import { getSocialProviders } from './auth-providers';
 import { redis, resend, twilio } from './services';
-import { getContext } from 'hono/context-storage';
+// import { getContext } from 'hono/context-storage';
 import { defaultUserSettings } from './schemas';
-import { getMigrations } from 'better-auth/db';
+// import { getMigrations } from 'better-auth/db';
 import { disableBrainFunction } from './brain';
 import { APIError } from 'better-auth/api';
 import { getZeroDB } from './server-utils';
 import type { EProviders } from '../types';
-import type { HonoContext } from '../ctx';
+// import type { HonoContext } from '../ctx';
 import { env } from 'cloudflare:workers';
 import { createDriver } from './driver';
-import { eq } from 'drizzle-orm';
+// import { eq } from 'drizzle-orm';
 import { createDb } from '../db';
 
 const connectionHandlerHook = async (account: Account) => {
@@ -233,7 +233,7 @@ export const createAuth = () => {
 
 const createAuthConfig = () => {
   const cache = redis();
-  const { db, conn } = createDb(env.HYPERDRIVE.connectionString);
+  const { db } = createDb(env.HYPERDRIVE.connectionString);
   return {
     database: drizzleAdapter(db, { provider: 'pg' }),
     secondaryStorage: {
@@ -284,7 +284,7 @@ const createAuthConfig = () => {
       },
     },
     onAPIError: {
-      onError: (error, ctx) => {
+      onError: (error, _ctx) => {
         console.error('API Error', error);
       },
       errorURL: `${env.VITE_PUBLIC_APP_URL}/login`,

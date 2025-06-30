@@ -1,7 +1,6 @@
 import {
   BaseSubscriptionFactory,
   type SubscriptionData,
-  type UnsubscriptionData,
 } from './base-subscription.factory';
 import { c, getNotificationsUrl } from '../../lib/utils';
 import jwt from '@tsndr/cloudflare-worker-jwt';

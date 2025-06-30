@@ -12,14 +12,13 @@ import {
   GmailSearchAssistantSystemPrompt,
   AiChatPrompt,
 } from '../lib/prompts';
-import { type Connection, type ConnectionContext, type WSMessage } from 'agents';
+import { type Connection, type WSMessage } from 'agents';
 import { EPrompts, type IOutgoingMessage, type ParsedMessage } from '../types';
 import type { IGetThreadResponse, MailManager } from '../lib/driver/types';
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
-import { createSimpleAuth, type SimpleAuth } from '../lib/auth';
 import { connectionToDriver } from '../lib/server-utils';
 import type { CreateDraftData } from '../lib/schemas';
-import { FOLDERS, parseHeaders } from '../lib/utils';
+import { FOLDERS } from '../lib/utils';
 import { env, RpcTarget } from 'cloudflare:workers';
 import { AIChatAgent } from 'agents/ai-chat-agent';
 import { tools as authTools } from './agent/tools';
@@ -31,7 +30,6 @@ import { getPrompt } from '../lib/brain';
 import { openai } from '@ai-sdk/openai';
 import { and, eq } from 'drizzle-orm';
 import { McpAgent } from 'agents/mcp';
-import { groq } from '@ai-sdk/groq';
 import { createDb } from '../db';
 import { z } from 'zod';
 
