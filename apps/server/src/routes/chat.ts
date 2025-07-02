@@ -35,19 +35,6 @@ import { z } from 'zod';
 
 const decoder = new TextDecoder();
 
-interface ThreadRow {
-  id: string;
-  thread_id: string;
-  provider_id: string;
-  messages: string;
-  latest_sender: string;
-  latest_received_on: string;
-  latest_subject: string;
-  latest_label_ids: string;
-  created_at: string;
-  updated_at: string;
-}
-
 export enum IncomingMessageType {
   UseChatRequest = 'cf_agent_use_chat_request',
   ChatClear = 'cf_agent_chat_clear',
@@ -334,8 +321,8 @@ export class ZeroAgent extends AIChatAgent<typeof env> {
   }
 
   private getDataStreamResponse(
-    onFinish: StreamTextOnFinishCallback<{}>,
-    options?: {
+    onFinish: StreamTextOnFinishCallback<Record<string, never>>,
+    _options?: {
       abortSignal: AbortSignal | undefined;
     },
   ) {
@@ -394,11 +381,11 @@ export class ZeroAgent extends AIChatAgent<typeof env> {
   }
 
   private async tryCatchChat<T>(fn: () => T | Promise<T>) {
-    try {
-      return await fn();
-    } catch (e) {
-      throw this.onError(e);
-    }
+            try {
+          return await fn();
+        } catch (_e) {
+          throw this.onError(_e);
+        }
   }
 
   private getAbortSignal(id: string): AbortSignal | undefined {
@@ -437,7 +424,7 @@ export class ZeroAgent extends AIChatAgent<typeof env> {
       let data: IncomingMessage;
       try {
         data = JSON.parse(message) as IncomingMessage;
-      } catch (error) {
+      } catch (_error) {
         // silently ignore invalid messages for now
         // TODO: log errors with log levels
         return;
@@ -906,10 +893,10 @@ export class ZeroAgent extends AIChatAgent<typeof env> {
       let totalSynced = 0;
       let pageToken: string | null = null;
       let hasMore = true;
-      let pageCount = 0;
+      let _pageCount = 0;
 
       while (hasMore) {
-        pageCount++;
+        _pageCount++;
 
         const result = await this.driver.list({
           folder,
@@ -947,7 +934,7 @@ export class ZeroAgent extends AIChatAgent<typeof env> {
     max?: number;
     cursor?: string;
   }) {
-    const { labelIds = [], folder, q, max = 50, cursor } = params;
+    const { labelIds = [], folder, q: _q, max = 50, cursor } = params;
 
     try {
       // Build WHERE conditions
@@ -1498,7 +1485,7 @@ export class ZeroMCP extends McpAgent<typeof env, {}, { userId: string }> {
               },
             ],
           };
-        } catch (e) {
+        } catch (_e) {
           return {
             content: [
               {
@@ -1530,7 +1517,7 @@ export class ZeroMCP extends McpAgent<typeof env, {}, { userId: string }> {
               },
             ],
           };
-        } catch (e) {
+        } catch (_e) {
           return {
             content: [
               {
@@ -1562,7 +1549,7 @@ export class ZeroMCP extends McpAgent<typeof env, {}, { userId: string }> {
               },
             ],
           };
-        } catch (e) {
+        } catch (_e) {
           return {
             content: [
               {

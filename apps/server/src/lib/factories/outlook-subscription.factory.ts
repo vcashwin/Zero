@@ -8,20 +8,20 @@ import { EProviders } from '../../types';
 export class OutlookSubscriptionFactory extends BaseSubscriptionFactory {
   readonly providerId = EProviders.microsoft;
 
-  public async subscribe(data: { body: SubscriptionData }): Promise<Response> {
+  public async subscribe(_data: { body: SubscriptionData }): Promise<Response> {
     // TODO: Implement Outlook subscription logic
     // This will handle Microsoft Graph API subscriptions for Outlook
 
     throw new Error('Outlook subscription not implemented yet');
   }
 
-  public async unsubscribe(data: { body: UnsubscriptionData }): Promise<Response> {
+  public async unsubscribe(_data: { body: UnsubscriptionData }): Promise<Response> {
     // TODO: Implement Outlook unsubscription logic
 
     throw new Error('Outlook unsubscription not implemented yet');
   }
 
-  public async verifyToken(token: string): Promise<boolean> {
+  public async verifyToken(_token: string): Promise<boolean> {
     // TODO: Implement Microsoft Graph token verification
 
     throw new Error('Outlook token verification not implemented yet');

@@ -833,7 +833,7 @@ export class GoogleMailManager implements MailManager {
     const failures = allResults.filter((result) => result.status === 'rejected');
     if (failures.length > 0) {
       const failureReasons = failures.map((f) => ({ threadId: f.threadId, reason: f.reason }));
-      failureReasons;
+      console.warn('Thread modification failures:', failureReasons);
     }
   }
   private normalizeSearch(folder: string, q: string) {

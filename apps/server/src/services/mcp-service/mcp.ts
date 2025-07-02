@@ -329,7 +329,7 @@ export class ZeroMCP extends McpAgent<typeof env, {}, { connectionId: string }> 
               },
             ],
           };
-        } catch (e) {
+        } catch (_e) {
           return {
             content: [
               {
@@ -363,7 +363,7 @@ export class ZeroMCP extends McpAgent<typeof env, {}, { connectionId: string }> 
               },
             ],
           };
-        } catch (e) {
+        } catch (_e) {
           return {
             content: [
               {
@@ -397,7 +397,7 @@ export class ZeroMCP extends McpAgent<typeof env, {}, { connectionId: string }> 
               },
             ],
           };
-        } catch (e) {
+        } catch (_e) {
           return {
             content: [
               {

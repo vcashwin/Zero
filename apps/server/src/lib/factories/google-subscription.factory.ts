@@ -36,7 +36,7 @@ class GoogleSubscriptionFactory extends BaseSubscriptionFactory {
 
       try {
         this.serviceAccount = JSON.parse(serviceAccountJson);
-      } catch (error) {
+      } catch (_error) {
         throw new Error('Invalid GOOGLE_S_ACCOUNT JSON format');
       }
       return this.serviceAccount as GoogleServiceAccount;
